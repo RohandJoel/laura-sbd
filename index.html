@@ -149,6 +149,14 @@ body{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:
 .fm button{border:0;background:var(--wine);color:#fff;border-radius:99px;padding:12px 26px;font:600 16px Fredoka;justify-self:start}
 .fm small{color:var(--soft)}
 .sm{font-size:14px;color:var(--soft);margin-top:14px}
+
+.ask{margin-top:14px;background:rgba(255,255,255,.9);border-radius:14px;padding:14px}
+.ask p{font-weight:700;color:var(--wine)}
+.askbox{position:relative;height:84px;margin-top:6px}
+.askbox button{position:absolute;top:18px;border:0;border-radius:99px;padding:11px 26px;font:600 17px Fredoka,sans-serif;transition:left .25s,top .25s,transform .25s}
+#yes{left:0;background:var(--wine);color:#fff;transform-origin:left center}
+#no{left:120px;background:#e9d8cf;color:var(--cocoa)}
+.askmsg{font-family:Caveat,cursive;font-size:24px;color:var(--wine);min-height:32px;line-height:1.2}
 @media(max-width:720px){
  body{padding:10px}
  .bubble{height:calc(100dvh - 20px);border-radius:28px}
@@ -165,6 +173,7 @@ body{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:
 <img id="ck" src="images/cookie.gif" alt="">
 <div class="flashfs" id="flashfs"></div>
 
+<form name="laura-snowman" data-netlify="true" hidden><input name="answer"></form>
 <main class="bubble">
 <nav class="nav2" id="nav">
   <button class="on" data-p="home">Home</button><button data-p="you">You</button><button data-p="gen">Genshin</button><button data-p="cats">Cats</button><button data-p="world">Her world</button><button data-p="quest">Quest</button><button data-p="wish">Wishes</button><button data-p="turn">Your turn</button>
@@ -261,7 +270,10 @@ body{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:
     <div class="pane on" id="k"><img src="images/tiramisu.jpg" alt="Tiramisu"><div><h3>The first tiramisu</h3><p>Made all by herself, for the first time. That is when I started taking cooking notes from her. It looks like it came from a cafe.</p></div></div>
     <div class="pane" id="c"><div class="two"><img src="images/cos1.jpg" alt=""><img src="images/cos2.jpg" alt=""></div><div><h3>Venti, but make it Laura</h3><p>Your cosplay is really cool. Also, sorry. I was not sure it was okay to use these photos without asking. If you want any of them gone, just say so.</p><p style="margin-top:8px">And yes, you look like a handsome boy. Highest compliment.</p></div></div>
     <div class="pane" id="w"><div class="two"><img src="images/nikki1.jpg" alt=""><img src="images/nikki2.jpg" alt=""></div><div><h3>Shining Nikki fits</h3><p>Your models are always styled so well.</p><p class="hand" style="margin-top:6px">Styling score: S+</p></div></div>
-    <div class="pane" id="s"><div class="two"><img src="images/snow1.jpg" alt=""><img src="images/snow2.jpg" alt=""></div><div><h3>Tiny snowmen</h3><p>Mannnn I really wanted to experience snow! These pics you sent made me want it moreee. But it was a fun year last year when you showed all those pretty snowfilled places</p><div class="voucher">🎟 <b>Voucher for rei by you:</b> One very small snowman with Rei's name. Try it only after full recovery.</div></div></div>
+    <div class="pane" id="s"><div class="two"><img src="images/snow1.jpg" alt=""><img src="images/snow2.jpg" alt=""></div><div><h3>Tiny snowmen</h3><p>Mannnn I really wanted to experience snow! These pics you sent made me want it moreee. But it was a fun year last year when you showed all those pretty snowfilled places</p><div class="voucher">🎟 <b>Voucher for rei by you:</b> One very small snowman with Rei's name. Try it only after full recovery.</div>
+      <div class="ask"><p>So, Laura, will you make me a tiny snowman with my name this winter? &#9731;</p>
+        <div class="askbox" id="askbox"><button id="yes" type="button">Yes</button><button id="no" type="button">No</button></div>
+        <div class="askmsg" id="askmsg"></div></div></div></div>
   </div>
 </div>
 
@@ -358,6 +370,27 @@ $$('#tabs button').forEach(b=>b.onclick=()=>{$$('#tabs button').forEach(x=>x.cla
 const bx=$$('.q input');let saved=[];try{saved=JSON.parse(localStorage.getItem('lq')||'[]')}catch(e){}
 function upd(){const n=bx.filter(b=>b.checked).length;$('#hp').style.width=(n/bx.length*100)+'%';$('#win').style.display=n==bx.length?'block':'none';try{localStorage.setItem('lq',JSON.stringify(bx.map(b=>b.checked)))}catch(e){}}
 bx.forEach((b,i)=>{b.checked=!!saved[i];b.onchange=upd});upd();
+// snowman ask
+(function(){
+const box=$('#askbox'),yes=$('#yes'),no=$('#no'),msg=$('#askmsg');let n=0,done=false;
+function send(a){try{fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({'form-name':'laura-snowman',answer:a}).toString()}).catch(()=>{})}catch(e){}}
+function dodge(e){
+  if(done||n>=7)return;
+  if(e&&e.cancelable)e.preventDefault();
+  n++;
+  const W=box.clientWidth,H=box.clientHeight,bw=no.offsetWidth,bh=no.offsetHeight,yr=yes.getBoundingClientRect(),br=box.getBoundingClientRect();
+  let x,y,t=0;
+  do{x=Math.random()*(W-bw);y=Math.random()*(H-bh);t++}
+  while(t<30&&(x+bw>yr.left-br.left-8&&x<yr.right-br.left+8&&y+bh>yr.top-br.top-8&&y<yr.bottom-br.top+8)||Math.abs(x-parseFloat(no.style.left||0))<40&&t<30);
+  no.style.left=x+'px';no.style.top=y+'px';
+  yes.style.transform='scale('+(1+n*.05)+')';
+  msg.textContent=['Oops, wrong button.','Try again.','Almost!','Hehe.','Too slow.','Really?','One more try?'][n-1];
+}
+['mouseenter','touchstart','pointerdown'].forEach(ev=>no.addEventListener(ev,dodge,{passive:false}));
+no.addEventListener('focus',dodge);
+no.addEventListener('click',()=>{if(n<7){dodge();return}done=true;msg.textContent='okay laura nws :( you can say no';send('no');yes.disabled=no.disabled=true;no.style.opacity=.5});
+yes.addEventListener('click',()=>{if(done)return;done=true;msg.textContent='Yayyy! Thank you Laura! I will wait for it, only after you fully recover. \u2603';send('yes');yes.disabled=no.disabled=true;no.style.display='none'});
+})();
 // form
 $('#rf').addEventListener('submit',e=>{e.preventDefault();const f=e.target;
   fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()})
