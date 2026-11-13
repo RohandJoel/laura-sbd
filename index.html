@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>For Laura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#fbf3ea;--paper:#fffaf3;--cocoa:#4a2f27;--soft:#7a5a50;--wine:#8c1d3f;--blush:#f3c9cf;--night:#1d2342;--r:20px}
+*{box-sizing:border-box;margin:0}
+html,body{overflow-x:hidden}
+html{scroll-behavior:smooth}
+body{color:var(--cocoa);font:17px/1.65 Nunito,system-ui,sans-serif;background-image:radial-gradient(#f0ddd0 1.2px,transparent 1.2px);background-size:26px 26px}
+@media(pointer:fine){body.ck,body.ck *{cursor:none!important}}
+h1,h2,h3{font-family:Fredoka,sans-serif;font-weight:600;line-height:1.15}
+h2{font-size:clamp(26px,4vw,34px);color:var(--wine);margin-bottom:14px}
+.hand{font-family:Caveat,cursive;font-size:1.45em;color:var(--wine)}
+
+.card{background:var(--paper);border-radius:var(--r);box-shadow:0 6px 24px rgba(74,47,39,.1);padding:26px}
+img{max-width:100%;display:block}
+.rv{opacity:0;transform:translateY(18px);transition:.7s}
+.rv.in{opacity:1;transform:none}
+.stk{position:absolute;width:64px;pointer-events:none;filter:drop-shadow(0 4px 4px rgba(0,0,0,.15))}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;padding-top:36px;overflow-x:clip}
+.hero h1{font-size:clamp(40px,7vw,64px);color:var(--wine)}
+.hero p{margin-top:12px;color:var(--soft);max-width:420px}
+.tag{display:inline-block;background:var(--blush);color:var(--wine);border-radius:99px;padding:4px 14px;font-weight:700;font-size:14px;margin-bottom:14px}
+.girl{perspective:900px;touch-action:manipulation;user-select:none;-webkit-tap-highlight-color:transparent}
+#girl{transform-origin:50% 60%;will-change:transform}
+#girl svg{width:100%;height:auto;max-height:560px}
+.snapcap{text-align:center;font-family:Caveat;font-size:24px;color:var(--wine);min-height:34px}
+.flashfs{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:30}
+.out{margin-top:26px;display:flex;gap:16px;align-items:center;background:var(--paper);border-radius:var(--r);padding:12px;box-shadow:0 6px 24px rgba(74,47,39,.1);max-width:440px}
+.out img{width:92px;border-radius:12px}
+.out small{color:var(--soft);display:block;line-height:1.4}
+
+/* thanks */
+.note p{margin-bottom:12px}
+.note .sign{font-family:Caveat;font-size:32px;color:var(--wine);margin:0}
+.sticks{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:22px}
+.sticky{padding:16px 16px 18px;border-radius:6px;font-family:Caveat;font-size:23px;line-height:1.25;box-shadow:0 5px 12px rgba(0,0,0,.12);color:#3d2a24}
+.sticky:nth-child(1){background:#ffe9a8;transform:rotate(-2deg)}
+.sticky:nth-child(2){background:#f8c9d0;transform:rotate(1.5deg)}
+.sticky:nth-child(3){background:#cfe8d5;transform:rotate(-1deg)}
+.sticky:nth-child(4){background:#d4def7;transform:rotate(2deg)}
+.sticky small{display:block;font:600 12px Nunito;opacity:.6;margin-top:6px}
+
+/* watch */
+.watch{background:var(--night);color:#eef0ff;border-radius:var(--r);display:grid;grid-template-columns:1.1fr 1fr;gap:0;overflow:hidden;box-shadow:0 10px 30px rgba(29,35,66,.35)}
+.watch img{height:100%;object-fit:cover}
+.watch div{padding:28px}
+.watch h2{color:#c9d3ff}
+.eye{display:inline-block;animation:blink 5s infinite}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+
+/* moments */
+.moments{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:20px;margin-top:10px}
+.pol{background:#fff;padding:10px 10px 14px;border-radius:8px;box-shadow:0 6px 18px rgba(74,47,39,.15)}
+.pol:nth-child(odd){transform:rotate(-1.4deg)}.pol:nth-child(even){transform:rotate(1.2deg)}
+.pol img{border-radius:4px;aspect-ratio:4/3;object-fit:cover;width:100%;background:#000}
+.pol p{font-size:15px;margin-top:10px;line-height:1.45}
+.pol b{font-family:Fredoka;color:var(--wine);display:block}
+
+/* slider */
+.slider{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;scrollbar-width:none;padding:6px 2px 10px}
+.slider::-webkit-scrollbar{display:none}
+.slide{flex:0 0 min(300px,78%);scroll-snap-align:center;background:#fff;border-radius:16px;padding:10px;box-shadow:0 6px 18px rgba(74,47,39,.14)}
+.slide img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px}
+.slide p{text-align:center;font-family:Caveat;font-size:22px;color:var(--wine);margin-top:6px}
+.nav{display:flex;gap:10px;align-items:center;margin-top:6px}
+.nav button{border:0;background:var(--wine);color:#fff;width:40px;height:40px;border-radius:50%;font-size:18px}
+.nav span{color:var(--soft);font-size:14px}
+.bios{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:22px}
+.bio{background:var(--paper);border-radius:16px;padding:16px;box-shadow:0 4px 14px rgba(74,47,39,.1)}
+.bio h3{font-size:19px}.bio small{color:var(--wine);font-weight:700}
+.bio p{font-size:15px;margin-top:6px;line-height:1.5}
+
+/* tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.tabs button{border:2px solid var(--blush);background:transparent;color:var(--cocoa);padding:8px 16px;border-radius:99px;font:600 15px Fredoka}
+.tabs button.on{background:var(--wine);border-color:var(--wine);color:#fff}
+.pane{display:none;grid-template-columns:1fr 1fr;gap:20px;align-items:center}
+.pane.on{display:grid}
+.pane img{border-radius:14px;width:100%;max-height:380px;object-fit:cover;background:#000}
+.pane .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.voucher{border:2px dashed var(--wine);border-radius:14px;padding:14px;margin-top:12px;background:#fff;font-size:15px}
+
+/* quest */
+.hp{height:16px;background:#f0ddd0;border-radius:99px;overflow:hidden;margin:6px 0 16px}
+.hp i{display:block;height:100%;width:0;background:linear-gradient(90deg,#e86a8a,var(--wine));transition:width .5s}
+.q label{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px dashed #ead6c8;cursor:pointer}
+.q input{width:20px;height:20px;accent-color:var(--wine)}
+.q input:checked+span{text-decoration:line-through;opacity:.55}
+.win{display:none;margin-top:14px;font-family:Caveat;font-size:26px;color:var(--wine)}
+
+/* wishes */
+.wishes{list-style:none;padding:0;display:grid;gap:10px}
+.wishes li{background:var(--paper);border-radius:14px;padding:14px 18px;box-shadow:0 3px 10px rgba(74,47,39,.08)}
+.bts{margin-top:18px;background:#fff;padding:10px;border-radius:12px;box-shadow:0 6px 18px rgba(74,47,39,.12);max-width:520px}
+.bts img{border-radius:8px;width:100%}
+.bts p{font-size:14px;color:var(--soft);margin-top:8px}
+
+/* footer */
+footer{text-align:center;padding:30px 20px 70px;max-width:620px;margin:0 auto;color:var(--soft)}
+footer form{margin:18px auto 0;display:grid;gap:10px}
+footer textarea{border:2px solid var(--blush);border-radius:14px;padding:12px;font:inherit;background:var(--paper);color:var(--cocoa);min-height:80px;resize:vertical}
+footer button{border:0;background:var(--wine);color:#fff;border-radius:99px;padding:12px 22px;font:600 16px Fredoka;justify-self:center}
+#ck{position:fixed;left:0;top:0;width:56px;pointer-events:none;z-index:50;display:none;will-change:transform}
+body.ck #ck{display:block}
+
+@media(max-width:720px){
+ .hero,.watch,.pane.on{grid-template-columns:1fr}
+ .watch img{height:260px}
+ .stk{width:48px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
+
+/* bubble layout */
+body{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:16px;background:#f7e6dc}
+.blob{position:fixed;border-radius:50%;filter:blur(60px);opacity:.75;z-index:0;animation:fl 16s ease-in-out infinite alternate}
+.b1{width:46vmax;height:46vmax;background:#f6b9c4;left:-12vmax;top:-12vmax}
+.b2{width:40vmax;height:40vmax;background:#cfc3f2;right:-10vmax;top:18vh;animation-delay:-5s}
+.b3{width:38vmax;height:38vmax;background:#ffd9a8;left:20vw;bottom:-18vmax;animation-delay:-9s}
+@keyframes fl{to{transform:translate(4vmax,3vmax) scale(1.08)}}
+.bubble{position:relative;z-index:1;width:min(960px,100%);height:min(760px,calc(100dvh - 32px));display:flex;flex-direction:column;border-radius:36px;background:rgba(255,255,255,.42);backdrop-filter:blur(22px) saturate(1.3);-webkit-backdrop-filter:blur(22px) saturate(1.3);border:1.5px solid rgba(255,255,255,.75);box-shadow:0 20px 60px rgba(140,29,63,.18),inset 0 1px 0 rgba(255,255,255,.9);overflow:hidden}
+.bubble:before{content:"";position:absolute;left:6%;top:0;width:38%;height:90px;border-radius:0 0 90px 90px;background:linear-gradient(rgba(255,255,255,.55),transparent);pointer-events:none}
+.nav2{display:flex;gap:6px;padding:14px 16px 8px;overflow-x:auto;scrollbar-width:none;flex:0 0 auto}
+.nav2::-webkit-scrollbar{display:none}
+.nav2 button{flex:0 0 auto;border:0;background:rgba(255,255,255,.5);color:var(--cocoa);padding:8px 16px;border-radius:99px;font:600 15px Fredoka,sans-serif;transition:.2s}
+.nav2 button.on{background:var(--wine);color:#fff;box-shadow:0 4px 12px rgba(140,29,63,.3)}
+.views{flex:1;overflow-y:auto;overflow-x:hidden;padding:10px 24px 70px;scrollbar-width:thin;position:relative}
+.pg{display:none}
+.pg.on{display:block;animation:pgin .45s ease}
+@keyframes pgin{from{opacity:0;transform:translateY(10px)}}
+.pg h2{margin-bottom:12px}
+.pg .card{background:rgba(255,250,243,.85)}
+.homeg{display:grid;grid-template-columns:1.05fr 1fr;gap:16px;align-items:center;min-height:100%}
+.homeg h1{font-size:clamp(34px,6vw,56px);color:var(--wine)}
+.homeg #girl svg{max-height:min(480px,52vh)}
+.moments{grid-template-columns:repeat(2,1fr)}
+.pol img{aspect-ratio:16/10}
+.fm{display:grid;gap:10px;margin-top:6px}
+.fm label{font:600 15px Fredoka;color:var(--wine)}
+.fm textarea,.fm input{width:100%;border:2px solid var(--blush);border-radius:14px;padding:11px 13px;font:inherit;background:rgba(255,255,255,.85);color:var(--cocoa)}
+.fm textarea{min-height:84px;resize:vertical}
+.fm button{border:0;background:var(--wine);color:#fff;border-radius:99px;padding:12px 26px;font:600 16px Fredoka;justify-self:start}
+.fm small{color:var(--soft)}
+.sm{font-size:14px;color:var(--soft);margin-top:14px}
+@media(max-width:720px){
+ body{padding:10px}
+ .bubble{height:calc(100dvh - 20px);border-radius:28px}
+ .views{padding:8px 16px 70px}
+ .homeg{grid-template-columns:1fr}
+ .homeg #girl svg{max-height:300px}
+ .moments{grid-template-columns:1fr}
+ .pane.on{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<img id="ck" src="images/cookie.gif" alt="">
+<div class="flashfs" id="flashfs"></div>
+
+<main class="bubble">
+<nav class="nav2" id="nav">
+  <button class="on" data-p="home">Home</button><button data-p="you">You</button><button data-p="gen">Genshin</button><button data-p="cats">Cats</button><button data-p="world">Her world</button><button data-p="quest">Quest</button><button data-p="wish">Wishes</button><button data-p="turn">Your turn</button>
+</nav>
+<div class="views" id="views">
+
+<div class="pg on" id="home">
+  <div class="homeg">
+    <div>
+      <span class="tag">14 November</span>
+      <h1>Happy Birthday, Laura</h1>
+      <p style="margin-top:10px;color:var(--soft);max-width:420px">No party. No pressure. Just a small page made for you. Take your time with it, one bubble at a time.</p>
+      <div class="out">
+        <img src="images/outfit.jpg" alt="Laura's new outfit">
+        <div><b>New outfit shoot</b><small>Looking good as always. Also, please rest well and get better soon.</small></div>
+      </div>
+    </div>
+    <div>
+      <div class="girl" id="art"><div id="girl">
+        <svg viewBox="0 0 1086 1448" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Laura">
+          <image href="images/laura-art.png" width="1086" height="1448"/>
+          <g id="hairL"><image href="images/laura-hair.png" width="1086" height="1448"/></g>
+          <circle id="flash" cx="668" cy="466" r="10" fill="#fff" opacity="0"/>
+        </svg>
+      </div></div>
+      <div class="snapcap" id="snapcap">Tap her.</div>
+    </div>
+  </div>
+</div>
+
+<div class="pg" id="you">
+  <h2>A thank you</h2>
+  <div class="card note">
+    <p>Well, we don't talk that much, but I really want to thank you a lot. There were days when I felt really heavy, and you were one of the reasons I could come out of them. I also got so many food and life advices from you. Thanks for that, haha!</p>
+    <p>You made my birthday special, and I will never forget it. Thank you for that as well.</p>
+    <p>I still remember our first VC after almost two years of knowing each other. It was fun, and so easy to talk to you. You listen, you stay positive, and you console people like a pro. I do follow your advice, and the tiramisu story is where my cooking notes began.</p>
+    <p>Since you are sick, I can't show you everything I prepared in Genshin. So this site is for you, my little thanks and birthday wish.</p>
+    <p class="sign">Rei</p>
+  </div>
+  <div class="sticks">
+    <div class="sticky">"The right people will show up eventually."<small>You told me</small></div>
+    <div class="sticky">"Focus on yourself and become your own best friend."<small>You told me</small></div>
+    <div class="sticky">"You are not missing out on anything, you are only gaining from it."<small>You told me</small></div>
+    <div class="sticky">"Everyone deserves to be happy no matter the circumstances."<small>You told me</small></div>
+  </div>
+</div>
+
+<div class="pg" id="gen">
+  <div class="watch" style="margin-bottom:18px">
+    <img src="images/watch.jpg" alt="Varka watching over Laura">
+    <div>
+      <h2><span class="eye">👁</span> Varka Watch</h2>
+      <p>Varka is always watching you and wishes you will get well soon and take care of your health.</p>
+      <p style="margin-top:10px;opacity:.75;font-size:15px">Orders from the Grand Master: drink water, sleep, no skipping meals.</p>
+    </div>
+  </div>
+  <div class="moments">
+    <div class="pol"><img src="images/shoot1.jpg" alt=""><p><b>Varka photoshoot</b>The day I got Varka and we both became obsessed.</p></div>
+    <div class="pol"><img src="images/shoot2.jpg" alt=""><p><b>Take two</b>We took the photoshoot very seriously.</p></div>
+    <div class="pol"><img src="images/peace.jpg" alt=""><p><b>Our peace</b>You, me, Bonita and Cookie, just enjoying it.</p></div>
+    <div class="pol"><img src="images/valo.jpg" alt=""><p><b>Valorant night</b>You gave me the cool sunglasses. The cross one.</p></div>
+  </div>
+</div>
+
+<div class="pg" id="cats">
+  <h2>The cat council</h2>
+  <div class="slider" id="sl">
+    <div class="slide"><img src="images/cookie2.jpg" alt="Cookie" loading="lazy"><p>Cookie</p></div>
+    <div class="slide"><img src="images/bonita1.jpg" alt="Bonita" loading="lazy"><p>Bonita</p></div>
+    <div class="slide"><img src="images/cookie1.jpg" alt="Cookie" loading="lazy"><p>Cookie, lap duty</p></div>
+    <div class="slide"><img src="images/bonita2.jpg" alt="Bonita" loading="lazy"><p>Bonita, queen at rest</p></div>
+    <div class="slide"><img src="images/cat4.jpg" alt="" loading="lazy"><p>Very serious hat day</p></div>
+    <div class="slide"><img src="images/cat3.jpg" alt="" loading="lazy"><p>Pets accepted</p></div>
+    <div class="slide"><img src="images/cat6.jpg" alt="" loading="lazy"><p>That stare</p></div>
+    <div class="slide"><img src="images/cat7.jpg" alt="" loading="lazy"><p>Nap stretch</p></div>
+    <div class="slide"><img src="images/cat5.jpg" alt="" loading="lazy"><p>Fashion model</p></div>
+    <div class="slide"><img src="images/cat8.jpg" alt="" loading="lazy"><p>Sleepy council</p></div>
+  </div>
+  <div class="nav"><button id="pv" aria-label="Previous">‹</button><button id="nx" aria-label="Next">›</button><span>swipe for more</span></div>
+  <div class="bios">
+    <div class="bio"><small>Cookie</small><h3>Chief Wake-Up Officer</h3><p>Makes sure you get up every single day.</p></div>
+    <div class="bio"><small>Bonita</small><h3>Queen of the house</h3><p>Rules from your bed. Walks in front of the screen when you play, to get your attention.</p></div>
+    <div class="bio"><small>Chimey</small><h3>Council member</h3><p>Famous, even without a photo here.</p></div>
+    <div class="bio"><small>Belle</small><h3>Council member</h3><p>Also very important.</p></div>
+  </div>
+</div>
+
+<div class="pg" id="world">
+  <h2>Her world</h2>
+  <div class="tabs" id="tabs">
+    <button class="on" data-t="k">Kitchen</button><button data-t="c">Cosplay</button><button data-t="w">Wardrobe</button><button data-t="s">Winter</button>
+  </div>
+  <div class="card">
+    <div class="pane on" id="k"><img src="images/tiramisu.jpg" alt="Tiramisu"><div><h3>The first tiramisu</h3><p>Made all by herself, for the first time. That is when I started taking cooking notes from her. It looks like it came from a cafe.</p></div></div>
+    <div class="pane" id="c"><div class="two"><img src="images/cos1.jpg" alt=""><img src="images/cos2.jpg" alt=""></div><div><h3>Venti, but make it Laura</h3><p>Your cosplay is really cool. Also, sorry. I was not sure it was okay to use these photos without asking. If you want any of them gone, just say so.</p><p style="margin-top:8px">And yes, you look like a handsome boy. Highest compliment.</p></div></div>
+    <div class="pane" id="w"><div class="two"><img src="images/nikki1.jpg" alt=""><img src="images/nikki2.jpg" alt=""></div><div><h3>Shining Nikki fits</h3><p>Your models are always styled so well.</p><p class="hand" style="margin-top:6px">Styling score: S+</p></div></div>
+    <div class="pane" id="s"><div class="two"><img src="images/snow1.jpg" alt=""><img src="images/snow2.jpg" alt=""></div><div><h3>Tiny snowmen</h3><p>You made little snowmen last winter. As a joke, I asked for one with my name too.</p><div class="voucher">🎟 <b>Voucher:</b> One very small snowman with Rei's name on it. Valid only after full recovery.</div></div></div>
+  </div>
+</div>
+
+<div class="pg" id="quest">
+  <h2>Get well quest</h2>
+  <div class="card q">
+    <b>HP</b><div class="hp"><i id="hp"></i></div>
+    <label><input type="checkbox"><span>Drink some water</span></label>
+    <label><input type="checkbox"><span>Eat something warm</span></label>
+    <label><input type="checkbox"><span>Rest without guilt</span></label>
+    <label><input type="checkbox"><span>Let Cookie do his job</span></label>
+    <label><input type="checkbox"><span>Take your medicine on time</span></label>
+    <div class="win" id="win">Quest complete. Varka approves.</div>
+  </div>
+</div>
+
+<div class="pg" id="wish">
+  <h2>My wishes for you</h2>
+  <ul class="wishes">
+    <li>Good health, and a fast recovery.</li>
+    <li>Peace, on the 14th and every other day.</li>
+    <li>The right people around you, always.</li>
+    <li>Luck in every pull.</li>
+    <li><b>Many BTS tickets this time!</b> For you and your people.</li>
+  </ul>
+  <div class="bts"><img src="images/bts.png" alt="BTS ticket waiting room"><p>Us in the waiting room, trying to get you tickets. We did not get them, but we tried together. Next time.</p></div>
+</div>
+
+<div class="pg" id="turn">
+  <h2>Now your turn</h2>
+  <div class="card">
+    <p style="margin-bottom:14px">You did so much for me, and I did nothing. So please tell me two things I can do for you. Big or small. Only if you want to.</p>
+    <form class="fm" name="laura-reply" method="POST" data-netlify="true" id="rf">
+      <input type="hidden" name="form-name" value="laura-reply">
+      <label for="f1">Your wishes</label>
+      <textarea id="f1" name="wishes" placeholder="Anything you wish for. Birthday wishes, or just life wishes."></textarea>
+      <label for="f2">Two things I can do for you</label>
+      <input id="f2" name="thing1" placeholder="1.">
+      <input name="thing2" placeholder="2.">
+      <label for="f3">Anything you want to tell me</label>
+      <textarea id="f3" name="message" placeholder="Anything at all. No pressure."></textarea>
+      <button>Send to Rei</button>
+      <small id="rs"></small>
+    </form>
+  </div>
+  <p class="sm">I used a few photos you shared without asking first. Sorry about that. Tell me and I will take down anything you like. Take care, Laura. Happy birthday.</p>
+  <p class="hand">Rei</p>
+</div>
+
+</div>
+<img class="stk" src="images/cookie.png" alt="" style="right:18px;bottom:14px;width:54px;z-index:3">
+</main>
+<script>
+(function(){
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+// reveal
+const vw=$('#views');
+function go(p){$$('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.p===p));$$('.pg').forEach(x=>x.classList.toggle('on',x.id===p));vw.scrollTop=0;try{history.replaceState(null,'','#'+p)}catch(e){}}
+$$('#nav button').forEach(b=>b.onclick=()=>{go(b.dataset.p);b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'})});
+const h=location.hash.slice(1);if(h&&$('#'+h)&&$('#'+h).classList.contains('pg'))go(h);
+// cookie cursor
+if(matchMedia('(pointer:fine)').matches){
+  const ck=$('#ck');let tx=-100,ty=-100,x=-100,y=-100,on=false;
+  addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;if(!on){on=true;document.body.classList.add('ck');x=tx;y=ty}});
+  (function f(){x+=(tx-x)*.35;y+=(ty-y)*.35;ck.style.transform='translate('+(x-22)+'px,'+(y-14)+'px)';requestAnimationFrame(f)})();
+}
+// hero animation
+const girl=$('#girl'),hair=$('#hairL'),fl=$('#flash'),ff=$('#flashfs'),cap=$('#snapcap'),art=$('#art');
+let mx=0,my=0,cx=0,cy=0,t0=performance.now(),glance=0,gx=0;
+addEventListener('pointermove',e=>{const r=art.getBoundingClientRect();mx=Math.max(-1,Math.min(1,(e.clientX-(r.left+r.width/2))/(innerWidth/2)));my=Math.max(-1,Math.min(1,(e.clientY-(r.top+r.height/2))/(innerHeight/2)))});
+if(!rm)(function loop(now){
+  const t=(now-t0)/1000;
+  if(now>glance){gx=(Math.random()*2-1)*.5;glance=now+2500+Math.random()*3000}
+  const tgx=(matchMedia('(pointer:fine)').matches?mx:gx)||0;
+  cx+=(tgx-cx)*.06;cy+=(my*.6-cy)*.06;
+  const br=Math.sin(t*1.6),sw=Math.sin(t*1.1)*1.6;
+  girl.style.transform='rotateY('+cx*7+'deg) rotateX('+(-cy*3)+'deg) rotateZ('+cx*1.4+'deg) translateY('+br*2.5+'px) scale('+(1+br*.004)+')';
+  hair.setAttribute('transform','rotate('+(sw+cx*-2.2)+' 470 300) translate('+cx*-7+' '+cy*-2+')');
+  requestAnimationFrame(loop)})(performance.now());
+const caps=['Click.','Another one.','Say varka.','Okay, that one was good.','Camera shy?','Still pretty.'];let ci=0;
+art.addEventListener('click',()=>{
+  cap.textContent=caps[ci++%caps.length];
+  fl.setAttribute('opacity','1');ff.style.transition='none';ff.style.opacity='.55';
+  setTimeout(()=>{ff.style.transition='opacity .5s';ff.style.opacity='0';fl.setAttribute('opacity','0')},60);
+});
+// slider
+const sl=$('#sl');const step=()=>sl.querySelector('.slide').offsetWidth+14;
+$('#nx').onclick=()=>sl.scrollBy({left:step(),behavior:'smooth'});
+$('#pv').onclick=()=>sl.scrollBy({left:-step(),behavior:'smooth'});
+// tabs
+$$('#tabs button').forEach(b=>b.onclick=()=>{$$('#tabs button').forEach(x=>x.classList.remove('on'));$$('.pane').forEach(x=>x.classList.remove('on'));b.classList.add('on');$('#'+b.dataset.t).classList.add('on')});
+// quest
+const bx=$$('.q input');let saved=[];try{saved=JSON.parse(localStorage.getItem('lq')||'[]')}catch(e){}
+function upd(){const n=bx.filter(b=>b.checked).length;$('#hp').style.width=(n/bx.length*100)+'%';$('#win').style.display=n==bx.length?'block':'none';try{localStorage.setItem('lq',JSON.stringify(bx.map(b=>b.checked)))}catch(e){}}
+bx.forEach((b,i)=>{b.checked=!!saved[i];b.onchange=upd});upd();
+// form
+$('#rf').addEventListener('submit',e=>{e.preventDefault();const f=e.target;
+  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()})
+  .then(()=>{$('#rs').textContent='Sent. Thank you, Laura.';f.reset()}).catch(()=>{$('#rs').textContent='Could not send. That is okay.'})});
+})();
+</script>
+</body>
+</html>
